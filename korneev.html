@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Антон Корнеев — Системный администратор</title>
+  <style>
+    :root {
+      --bg: #0F1720;
+      --bg-card: #17212B;
+      --bg-card2: #1E2A38;
+      --text: #E8EDF2;
+      --text-light: #9BA8B7;
+      --accent: #4FC3F7;
+      --accent-dim: #2E7D9A;
+      --line: #2A3846;
+      --success: #66BB6A;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 14px;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .page {
+      background: var(--bg-card);
+      max-width: 1040px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      padding: 48px 52px;
+      border: 1px solid var(--line);
+    }
+
+    /* ===== ШАПКА ===== */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 36px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .name-title h1 {
+      font-size: 36px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .name-title .subtitle {
+      font-size: 15px;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .name-title .age {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: 8px;
+    }
+
+    .salary-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(102, 187, 106, 0.1);
+      color: var(--success);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid rgba(102, 187, 106, 0.2);
+      margin-top: 10px;
+    }
+
+    .salary-badge::before {
+      content: "₽";
+      font-size: 14px;
+    }
+
+    .contact {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contact-row .icon {
+      color: var(--accent);
+      width: 16px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .contact a {
+      color: var(--text-light);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .contact a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ===== СЕТКА ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 44px;
+    }
+
+    /* ===== СЕКЦИИ ===== */
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::before {
+      content: "//";
+      color: var(--accent-dim);
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    /* ===== ОПЫТ РАБОТЫ ===== */
+    .experience-item {
+      margin-bottom: 24px;
+      padding: 20px 22px;
+      background: var(--bg-card2);
+      border-radius: 12px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .exp-header h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .exp-date {
+      font-size: 12px;
+      color: var(--accent);
+      background: rgba(79, 195, 247, 0.1);
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .exp-company {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .exp-company strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Группы задач */
+    .task-group {
+      margin-bottom: 16px;
+    }
+
+    .task-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .task-group h4 {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .task-group h4::before {
+      content: "▸";
+      color: var(--accent-dim);
+      font-size: 10px;
+    }
+
+    .exp-description {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .exp-description li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 6px;
+      color: var(--text-light);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .exp-description li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent-dim);
+      font-weight: 300;
+    }
+
+    .exp-description li strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ===== ОБРАЗОВАНИЕ ===== */
+    .education-item {
+      margin-bottom: 14px;
+      padding: 14px 18px;
+      background: var(--bg-card2);
+      border-radius: 10px;
+    }
+
+    .education-item h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .edu-meta {
+      font-size: 12px;
+      color: var(--text-light);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .edu-meta .year {
+      color: var(--accent);
+    }
+
+    /* ===== НАВЫКИ ===== */
+    .skills-group {
+      margin-bottom: 18px;
+    }
+
+    .skills-group h4 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      background: rgba(79, 195, 247, 0.08);
+      color: var(--text);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      margin: 0 6px 8px 0;
+      border: 1px solid rgba(79, 195, 247, 0.15);
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      background: rgba(79, 195, 247, 0.18);
+      border-color: var(--accent);
+    }
+
+    /* ===== ЯЗЫКИ ===== */
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .lang-item:last-child {
+      border-bottom: none;
+    }
+
+    .lang-name {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .lang-level {
+      font-size: 12px;
+      color: var(--text-light);
+      background: var(--bg-card2);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* ===== ДОП. ИНФО ===== */
+    .info-list {
+      list-style: none;
+    }
+
+    .info-list li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 8px;
+      color: var(--text-light);
+      font-size: 13px;
+    }
+
+    .info-list li::before {
+      content: "●";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 8px;
+      top: 5px;
+    }
+
+    /* ===== АДАПТИВ ===== */
+    @media (max-width: 820px) {
+      .page {
+        padding: 32px 24px;
+      }
+
+      .header {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .name-title h1 {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 16px 8px;
+      }
+
+      .page {
+        padding: 24px 18px;
+        border-radius: 14px;
+      }
+
+      .name-title h1 {
+        font-size: 24px;
+      }
+
+      .exp-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .contact {
+        font-size: 12px;
+      }
+
+      .experience-item {
+        padding: 16px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ШАПКА -->
+    <header class="header">
+      <div class="name-title">
+        <h1>Антон Корнеев</h1>
+        <div class="subtitle">Системный администратор</div>
+        <div class="age">Мужчина, 20 лет · родился 4 сентября 2006</div>
+        <div class="salary-badge">100 000 ₽ на руки</div>
+      </div>
+
+      <div class="contact">
+        <div class="contact-row">
+          <span class="icon">📞</span>
+          <a href="tel:+79855279021">+7 (985) 527-90-21</a>
+        </div>
+        <div class="contact-row">
+          <span class="icon">✉</span>
+          <a href="mailto:korneevanton777@gmail.com">korneevanton777@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="icon">✈</span>
+          <a href="https://t.me/Anton_Korneev_777" target="_blank">@Anton_Korneev_777</a>
+        </div>
+        <div class="contact-row">
+          <span class="icon">📍</span>
+          <span>Москва</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- СЕТКА -->
+    <div class="grid">
+
+      <!-- ЛЕВАЯ КОЛОНКА -->
+      <div class="left">
+
+        <!-- ОПЫТ РАБОТЫ -->
+        <section class="section">
+          <div class="section-title">Опыт работы — 1 год 1 месяц</div>
+
+          <div class="experience-item">
+            <div class="exp-header">
+              <h3>Системный администратор</h3>
+              <span class="exp-date">Янв 2024 — Янв 2025</span>
+            </div>
+            <div class="exp-company">
+              <strong>Авангард, ООО</strong> · Москва · Розничная торговля (одежда, обувь, аксессуары)
+            </div>
+
+            <!-- Серверы -->
+            <div class="task-group">
+              <h4>Настройка и администрирование серверов</h4>
+              <ul class="exp-description">
+                <li>
+                  <strong>Active Directory:</strong> развёртывание контроллера домена, создание и ведение учётных записей пользователей и групп, настройка групповых политик (GPO), управление правами доступа к сетевым ресурсам, подключение рабочих станций к домену.
+                </li>
+                <li>
+                  <strong>nginx:</strong> установка и настройка веб-сервера, конфигурация виртуальных хостов (server blocks), настройка reverse proxy, SSL-сертификатов и редиректов.
+                </li>
+                <li>
+                  <strong>Zabbix:</strong> развёртывание сервера мониторинга, настройка агентов на подконтрольных узлах, создание шаблонов и триггеров, настройка оповещений о критических событиях (загрузка CPU, место на дисках, недоступность сервисов).
+                </li>
+                <li>
+                  <strong>NTP:</strong> настройка сервера точного времени, синхронизация часов на серверах и клиентских машинах, контроль рассинхронизации.
+                </li>
+                <li>
+                  <strong>Syslog:</strong> настройка централизованного сбора логов с серверов и сетевого оборудования, фильтрация и хранение журналов событий.
+                </li>
+                <li>
+                  <strong>RAID-массивы:</strong> сборка и конфигурирование RAID (уровни 0, 1, 5, 10), контроль состояния дисков, замена вышедших из строя накопителей, восстановление массива.
+                </li>
+                <li>
+                  <strong>Ideco:</strong> подключение клиентских машин к серверу безопасности, настройка фильтрации трафика, контроль доступа в интернет и блокировка нежелательных ресурсов.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Сетевое оборудование -->
+            <div class="task-group">
+              <h4>Настройка сетевого оборудования</h4>
+              <ul class="exp-description">
+                <li>
+                  <strong>MikroTik:</strong> базовая настройка маршрутизаторов, конфигурация NAT, DHCP-сервера, VLAN, firewall-правил, проброс портов, настройка VPN-туннелей (PPTP, L2TP, IPsec) для удалённого доступа.
+                </li>
+                <li>
+                  <strong>Cisco:</strong> настройка коммутаторов и маршрутизаторов, конфигурация VLAN, trunk-портов, статической и динамической маршрутизации, базовые настройки безопасности портов.
+                </li>
+                <li>
+                  Диагностика сетевых проблем: анализ трафика, поиск обрывов соединений, проверка доступности узлов, устранение конфликтов IP-адресов.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Мониторинг -->
+            <div class="task-group">
+              <h4>Мониторинг и поддержка</h4>
+              <ul class="exp-description">
+                <li>
+                  Постоянный мониторинг устройств клиентов через Zabbix: отслеживание доступности сервисов, загрузки ресурсов, состояния дисковых массивов.
+                </li>
+                <li>
+                  Оперативное реагирование на инциденты: диагностика и устранение неполадок, восстановление работоспособности сервисов, эскалация сложных случаев.
+                </li>
+                <li>
+                  Ведение технической документации: схемы сети, инструкции по настройке, журналы изменений конфигураций.
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ОБРАЗОВАНИЕ -->
+        <section class="section">
+          <div class="section-title">Образование</div>
+
+          <div class="education-item">
+            <h3>Московский приборостроительный техникум</h3>
+            <div class="edu-meta">
+              <span>09.02.06 — Сетевое и системное администрирование</span>
+              <span class="year">2026</span>
+            </div>
+          </div>
+
+          <div class="education-item">
+            <h3>ГБОУ Школа №49</h3>
+            <div class="edu-meta">
+              <span>Среднее общее образование</span>
+              <span class="year">2022</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- НАВЫКИ -->
+        <section class="section">
+          <div class="section-title">Навыки</div>
+
+          <div class="skills-group">
+            <h4>Серверы и службы</h4>
+            <span class="skill-tag">Windows Server</span>
+            <span class="skill-tag">Active Directory</span>
+            <span class="skill-tag">Group Policy (GPO)</span>
+            <span class="skill-tag">Linux</span>
+            <span class="skill-tag">Ubuntu</span>
+            <span class="skill-tag">Apache</span>
+            <span class="skill-tag">nginx</span>
+            <span class="skill-tag">Zabbix</span>
+            <span class="skill-tag">NTP</span>
+            <span class="skill-tag">Syslog</span>
+            <span class="skill-tag">RAID</span>
+          </div>
+
+          <div class="skills-group">
+            <h4>Сети и оборудование</h4>
+            <span class="skill-tag">MikroTik</span>
+            <span class="skill-tag">Cisco</span>
+            <span class="skill-tag">VLAN</span>
+            <span class="skill-tag">NAT / DHCP</span>
+            <span class="skill-tag">VPN (PPTP, L2TP, IPsec)</span>
+            <span class="skill-tag">Firewall</span>
+            <span class="skill-tag">Маршрутизация</span>
+          </div>
+
+          <div class="skills-group">
+            <h4>ПК и ПО</h4>
+            <span class="skill-tag">Настройка ПК</span>
+            <span class="skill-tag">Сборка ПК</span>
+            <span class="skill-tag">Windows 10</span>
+            <span class="skill-tag">Установка драйверов</span>
+            <span class="skill-tag">PowerShell</span>
+            <span class="skill-tag">Ideco</span>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ПРАВАЯ КОЛОНКА -->
+      <div class="right">
+
+        <!-- ЛИЧНЫЕ КАЧЕСТВА -->
+        <section class="section">
+          <div class="section-title">Личные качества</div>
+          <ul class="info-list">
+            <li>Пунктуальность</li>
+            <li>Сообразительность</li>
+            <li>Грамотность</li>
+            <li>Коммуникабельность</li>
+            <li>Ответственность</li>
+            <li>Дисциплинированность</li>
+            <li>Обучаемость и развитие</li>
+          </ul>
+        </section>
+
+        <!-- ЯЗЫКИ -->
+        <section class="section">
+          <div class="section-title">Языки</div>
+          <div class="lang-item">
+            <span class="lang-name">Русский</span>
+            <span class="lang-level">Родной</span>
+          </div>
+          <div class="lang-item">
+            <span class="lang-name">Английский</span>
+            <span class="lang-level">B1 — Средний</span>
+          </div>
+        </section>
+
+        <!-- УСЛОВИЯ РАБОТЫ -->
+        <section class="section">
+          <div class="section-title">Условия работы</div>
+          <ul class="info-list">
+            <li>Полная занятость</li>
+            <li>На месте работодателя</li>
+            <li>Готов к командировкам</li>
+            <li>Не готов к переезду</li>
+            <li>Время в пути — не имеет значения</li>
+          </ul>
+        </section>
+
+        <!-- ДОПОЛНИТЕЛЬНО -->
+        <section class="section">
+          <div class="section-title">Дополнительно</div>
+          <ul class="info-list">
+            <li>Права категории B</li>
+            <li>Гражданство: Россия</li>
+            <li>Разрешение на работу: Россия</li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
